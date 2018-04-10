@@ -1,19 +1,19 @@
 <?php
 
+
 namespace App\Controllers;
 
 use App\Core\MainController;
-use App\Models\Users;
+use App\Models\User;
 
 require 'cryptPassword.php';
 
-class Registration extends MainController
+class userCreate extends MainController
 {
     public function index()
     {
         $data = [];
         if ($_POST) {
-            $users = new Users();
             $login = $_POST['login'];
             $password = $_POST['password'];
             $password2 = $_POST['password2'];
@@ -53,33 +53,41 @@ class Registration extends MainController
                 $data['error']['error-age'] = 'Введите возраст';
             }
             if ($data['error']) {
-                $this->view->render('registration', $data);
+                $this->view->render('createuser', $data);
             }
-            $maxId = $users->getMaxId() + 1;
+            $maxId = User::all()->max('id') + 1;
             $photoName = md5($maxId);
             move_uploaded_file($photo['tmp_name'], "$this->uploads_dir/$photoName.jpg");
-            $getUser = $users->getUser($login);
+            $getUser = User::where('login', '=', $login)->exists();
             if (!$getUser) {
                 $password = hash256($password);
-                $result = $users->addUser($login, $password, $name, $age, $description, $photoName);
+                $result = User::create([
+                    'login' => $login,
+                    'password' => $password,
+                    'name' => $name,
+                    'age' => $age,
+                    'description' => $description,
+                    'photo' => $photoName
+                ]);
                 if ($result == false) {
                     $data = [
                         'error' => [
                             'error-login' => 'Такой логин уже существует!'
                         ]
                     ];
-                    $this->view->render('registration', $data);
+                    $this->view->render('createuser', $data);
                 }
-                $this->redirect('registration');
+                $this->redirect('createuser');
             } else {
                 $data = [
                     'error' => [
                         'error-login' => 'Такой логин уже существует!'
                     ]
                 ];
-                $this->view->render('registration', $data);
+                $this->view->render('createuser', $data);
             }
         }
-        $this->view->render('registration', $data);
+        $this->view->render('createuser', $data);
     }
+}
 }

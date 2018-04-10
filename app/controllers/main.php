@@ -1,7 +1,12 @@
 <?php
 
-namespace App;
-include('cryptPassword.php');
+namespace App\Controllers;
+
+use App\Core\MainController;
+use App\Models\Users;
+
+require 'cryptPassword.php';
+
 class Main extends MainController
 {
     public function index()
