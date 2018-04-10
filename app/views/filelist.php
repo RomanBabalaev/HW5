@@ -64,7 +64,7 @@
           <td><?=$user['photo']?></td>
             <td><img width="100" height="100" style="object-fit: cover;" src="<?=$uploads_dir . '/' . $user['photo'] . '.jpg'?>" alt=""></td>
           <td>
-            <a href="/filelist?delete=<?=$user['id']?>">Удалить аватарку пользователя</a>
+            <a href="/filelist?delete=<?=$user['id']?>">Удалить картинку пользователя</a>
           </td>
         </tr>
           <?php endforeach;?>
