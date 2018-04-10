@@ -1,11 +1,5 @@
 <?php
-//$modelsDir = realpath(__DIR__ . '/../models');
-//$controllersDir = realpath(__DIR__ . '');
-//$coreDir = realpath(__DIR__ . '/../core');
-//
-//require_once($modelsDir . DIRECTORY_SEPARATOR . 'users.php');
-//require_once($controllersDir . DIRECTORY_SEPARATOR . 'cryptPassword.php');
-//require_once($coreDir . DIRECTORY_SEPARATOR . 'MainController.php');
+
 namespace App;
 include('cryptPassword.php');
 
