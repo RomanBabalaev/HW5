@@ -2,7 +2,7 @@
 return [
     "db" => [
         'host' => 'localhost',
-        'dbname' => 'five_dz',
+        'dbname' => 'hw5',
         'user' => 'root',
         'password' => '',
         'charset' => 'utf8',
